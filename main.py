@@ -21,7 +21,7 @@ st.set_page_config(page_title="私の朝活記録")
 # ---Get Tracking Data---
 params = {
     "start_date": start_date,
-    "end_date": yesterday
+    "end_date": today
 }
 
 data = requests.get('https://api.track.toggl.com/api/v9/me/time_entries',auth=(API_KEY, "api_token"), params=params)
@@ -41,6 +41,7 @@ else:
 
 # ---Data Processing---
 df = pd.DataFrame.from_records(data.json())
+df = df.dropna(subset=["stop"])
 
 df["start"] = pd.to_datetime(df["start"])
 df["stop"] = pd.to_datetime(df["stop"])
@@ -70,16 +71,16 @@ data_total = data_total.set_index("date") # To use calmap, set date into index.
 
 # ---Output---
 st.markdown("## トレーニング")
-st.write(calmap.yearplot(data_total["training"], year=year, linewidth=0.1, cmap="BuGn").figure)
+st.write(calmap.yearplot(data_total["training"], year=year, linewidth=0.1, cmap="Greens").figure)
 
 st.markdown("## 読書・オーディオブック")
-st.write(calmap.yearplot(data_total["books"], year=year, linewidth=0.1, cmap="BuGn").figure)
+st.write(calmap.yearplot(data_total["books"], year=year, linewidth=0.1, cmap="Greens").figure)
 
 st.markdown("## 英語学習")
-st.write(calmap.yearplot(data_total["english"], year=year, linewidth=0.1, cmap="BuGn").figure)
+st.write(calmap.yearplot(data_total["english"], year=year, linewidth=0.1, cmap="Greens").figure)
 
 st.markdown("## プログラミング・その他")
-st.write(calmap.yearplot(data_total["self_study"], year=year, linewidth=0.1, cmap="BuGn").figure)
+st.write(calmap.yearplot(data_total["self_study"], year=year, linewidth=0.1, cmap="Greens").figure)
 
 
 # ---Extra; My profile in sidebar---
