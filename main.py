@@ -15,6 +15,7 @@ today = date.today()
 yesterday = today - timedelta(days=1)
 start_date = date(2022, 12, 1) # Put the date you started tracking
 year = today.year
+st.set_page_config(page_title="私の朝活記録")
 
 
 # ---Get Tracking Data---
@@ -83,7 +84,7 @@ st.write(calmap.yearplot(data_total["self_study"], year=year, linewidth=0.1, cma
 
 # ---Extra; My profile in sidebar---
 with st.sidebar:
-    img = Image.open("ダウンロード (29)_0118044807.png")
+    img = Image.open("icon.png")
     st.image(img, caption="作：Stable Diffusion", use_column_width=True)
     st.markdown("## 主な生息地")
     st.markdown("[Twitter](https://twitter.com/uwasanoaitsu910)", unsafe_allow_html=True)
