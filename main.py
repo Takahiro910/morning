@@ -9,7 +9,7 @@ import streamlit as st
 
 
 # ---Environment---
-load_dotenv('.env')
+load_dotenv(verbose=True, dotenv_path='.env')
 API_KEY = os.environ.get("API_KEY") # Or write your API KEY directly
 today = date.today()
 yesterday = today - timedelta(days=1)
