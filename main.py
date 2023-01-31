@@ -1,4 +1,3 @@
-import branca
 import calmap
 from datetime import datetime, timedelta, date
 from dotenv import load_dotenv
