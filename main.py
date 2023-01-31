@@ -9,7 +9,7 @@ from PIL import Image
 import requests
 import streamlit as st
 import streamlit.components.v1 as components
-from streamlit_folium import st_folium
+# from streamlit_folium import st_folium
 
 
 # ---Environment---
