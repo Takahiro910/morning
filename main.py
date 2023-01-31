@@ -1,8 +1,8 @@
 import calmap
 from datetime import datetime, timedelta, date
 from dotenv import load_dotenv
-import folium
-import geopandas as gpd
+# import folium
+# import geopandas as gpd
 import os
 import pandas as pd
 from PIL import Image
@@ -137,30 +137,30 @@ with st.sidebar:
     
     
 # ---Countries I talked---
-st.markdown("## 英会話講師の出身国")
-gdf = gpd.read_file('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
+# st.markdown("## 英会話講師の出身国")
+# gdf = gpd.read_file('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
 
-c_df = pd.read_csv("countries.csv", header=0, names=["country", "code"])
-c_df["from"] = "1"
-c_df = c_df.groupby("code").max().reset_index().sort_values("from", ascending=False)
+# c_df = pd.read_csv("countries.csv", header=0, names=["country", "code"])
+# c_df["from"] = "1"
+# c_df = c_df.groupby("code").max().reset_index().sort_values("from", ascending=False)
 
-gdf_c = gdf.merge(c_df, left_on="id", right_on="code", how="left")
-gdf_c = gdf_c.fillna(0)
-gdf1 = gpd.GeoDataFrame(gdf_c)
+# gdf_c = gdf.merge(c_df, left_on="id", right_on="code", how="left")
+# gdf_c = gdf_c.fillna(0)
+# gdf1 = gpd.GeoDataFrame(gdf_c)
 
-centroid=gdf1.geometry.centroid
-m = folium.Map(location=[centroid.y.mean(), centroid.x.mean()], zoom_start=1.5, tiles='OpenStreetMap')
+# centroid=gdf1.geometry.centroid
+# m = folium.Map(location=[centroid.y.mean(), centroid.x.mean()], zoom_start=1.5, tiles='OpenStreetMap')
 
-folium.GeoJson(gdf1[['geometry', 'name', 'from']], 
-               name = "Where My teachers are from",
-               style_function = lambda x: {"weight":1, 'color':'grey','fillColor':'#bcbcbc' if x['properties']['from'] == 0 else '#C81D25', 'fillOpacity':0.8, 'colorOpacity': 0.1},
-               highlight_function=lambda x: {'weight':3, 'color':'grey', 'fillOpacity':1},
-               smooth_factor=2.0,
-               tooltip=folium.features.GeoJsonTooltip(fields=['name'],
-                                              aliases=['Country:'], 
-                                              labels=True, 
-                                              sticky=True,
-                                             )
-).add_to(m)
+# folium.GeoJson(gdf1[['geometry', 'name', 'from']], 
+#                name = "Where My teachers are from",
+#                style_function = lambda x: {"weight":1, 'color':'grey','fillColor':'#bcbcbc' if x['properties']['from'] == 0 else '#C81D25', 'fillOpacity':0.8, 'colorOpacity': 0.1},
+#                highlight_function=lambda x: {'weight':3, 'color':'grey', 'fillOpacity':1},
+#                smooth_factor=2.0,
+#                tooltip=folium.features.GeoJsonTooltip(fields=['name'],
+#                                               aliases=['Country:'], 
+#                                               labels=True, 
+#                                               sticky=True,
+#                                              )
+# ).add_to(m)
 
-st_data = st_folium(m, width=1200, height=500)
+# st_data = st_folium(m, width=1200, height=500)
